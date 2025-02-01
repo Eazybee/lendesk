@@ -1,0 +1,49 @@
+name: lendesk-server
+
+services:
+  app:
+    build:
+      context: .
+      target: development
+    container_name: lendesk-server-dev
+    ports:
+      - "${PORT}:3000"
+    environment:
+      - NODE_ENV=development
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: ["npm", "run", "start:dev"]
+    profiles:
+      - dev  
+
+  app-prod:
+    build:
+      context: .
+      target: production
+    container_name: lendesk-server-dev-prod
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+    depends_on:
+      - redis
+    command: ["node", "dist/main.js"]
+    profiles:
+      - prod
+
+  redis:
+    image: "redis/redis-stack:latest"
+    container_name: redis-server
+    ports:
+      - "${REDIS_PORT}:6379"
+    restart: always
+    profiles:
+      - dev
+      - prod
