@@ -39,7 +39,7 @@ Ensure you have the following installed:
 
 ### Using Docker
 
-To run the application using Docker:
+To run the application using Docker: for development
 1. **Create `.env` from `.env.example`
 
 2. **Build the Docker image:**
@@ -48,12 +48,13 @@ To run the application using Docker:
    docker build -t lendesk-app .
    ```
 
-3. **Run the Docker container:**  for development
+3. **Run the Docker container:**  
 
    ```bash
    docker-compose --profile dev up --build
    ```
 
+4. Test the end points `http://localhost:3000/api/v1` on swagger
 ## Features
 - Redis for Datastorage
 - Endpoint
