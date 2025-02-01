@@ -75,6 +75,7 @@ To run the application using Docker: for development
  - add csrf 
  - add jwt to cookie not readable by client
  - use the nest configuration technique
+ - add tests
 
 
 ## License
